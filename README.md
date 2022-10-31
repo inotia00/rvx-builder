@@ -10,7 +10,7 @@ If you plan to use it from source, you'll also require [Node.js >= 16](https://n
 
 ## How to use
 
-If you are on a PC, download the latest executable from [here](https://github.com/reisxd/revanced-builder/releases/latest) or if you are on a Android device, please see [this](https://github.com/reisxd/revanced-builder/wiki/How-to-use-revanced-builder-on-Android).
+If you are on a PC, download the latest executable from [here](https://github.com/inotia00/rvx-builder/releases/latest) or if you are on a Android device, please see [this](https://github.com/inotia00/rvx-builder/wiki/How-to-use-rvx-builder-on-Android).
 
 **NOTE: If you intend to build the rooted version of either YouTube or YouTube Music, you must have the stock YouTube app to be the same version as the one chosen for building. Otherwise, the build will fail.**
 

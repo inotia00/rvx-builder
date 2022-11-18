@@ -10,30 +10,6 @@ const defaultPatchesList = JSON.stringify(
       {
         name: 'youtube.music',
         patches: []
-      },
-      {
-        name: 'android',
-        patches: []
-      },
-      {
-        name: 'frontpage',
-        patches: []
-      },
-      {
-        name: 'warnapp',
-        patches: []
-      },
-      {
-        name: 'trill',
-        patches: []
-      },
-      {
-        name: 'task',
-        patches: []
-      },
-      {
-        name: 'app',
-        patches: []
       }
     ]
   },

@@ -126,26 +126,6 @@ module.exports = async function getAppVersion(ws, message) {
     case 'youtube.music':
       versionsList = await getPage(`${APKMIRROR_UPLOAD_BASE}youtube-music`);
       break;
-    case 'android':
-      versionsList = await getPage(`${APKMIRROR_UPLOAD_BASE}twitter`);
-      break;
-    case 'frontpage':
-      versionsList = await getPage(`${APKMIRROR_UPLOAD_BASE}reddit`);
-      break;
-    case 'warnapp':
-      versionsList = await getPage(`${APKMIRROR_UPLOAD_BASE}warnwetter`);
-      break;
-    case 'trill':
-      versionsList = await getPage(`${APKMIRROR_UPLOAD_BASE}tik-tok`);
-      break;
-    case 'task':
-      versionsList = await getPage(
-        `${APKMIRROR_UPLOAD_BASE}ticktick-to-do-list-with-reminder-day-planner`
-      );
-      break;
-    case 'app':
-      versionsList = await getPage(`${APKMIRROR_UPLOAD_BASE}twitch`);
-      break;
   }
 
   /** @type {{ version: string; recommended: boolean; beta: boolean }[]} */
@@ -157,14 +137,7 @@ module.exports = async function getAppVersion(ws, message) {
   ).get()) {
     const versionName = version.attribs.title
       .replace('YouTube ', '')
-      .replace('Music ', '')
-      .replace('Twitter ', '')
-      .replace('Reddit ', '')
-      .replace('WarnWetter ', '')
-      .replace('TikTok ', '')
-      .replace('TickTick:To-do list & Tasks ', '')
-      .replace('Twitch: Live Game Streaming ', '')
-      .replace('_', ' ');
+      .replace('Music ', '');
 
     if (
       (global.jarNames.selectedApp === 'android' &&

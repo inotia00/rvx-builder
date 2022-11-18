@@ -82,24 +82,6 @@ async function reinstallReVanced() {
       if (!global.jarNames.isRooted)
         pkgNameToGetUninstalled = 'app.revanced.android.apps.youtube.music';
       break;
-    case 'android':
-      pkgNameToGetUninstalled = 'com.twitter.android';
-      break;
-    case 'frontpage':
-      pkgNameToGetUninstalled = 'com.reddit.frontpage';
-      break;
-    case 'warnapp':
-      pkgNameToGetUninstalled = 'de.dwd.warnapp';
-      break;
-    case 'trill':
-      pkgNameToGetUninstalled = 'com.ss.android.ugc.trill';
-      break;
-    case 'task':
-      pkgNameToGetUninstalled = 'com.ticktick.task';
-      break;
-    case 'app':
-      pkgNameToGetUninstalled = 'tv.twitch.android.app';
-      break;
   }
 
   await exec(
@@ -123,24 +105,6 @@ function outputName() {
       break;
     case 'youtube.music':
       part2 = 'YouTube_Music';
-      break;
-    case 'frontpage':
-      part2 = 'Reddit';
-      break;
-    case 'android':
-      part2 = 'Twitter';
-      break;
-    case 'warnapp':
-      part2 = 'WarnWetter';
-      break;
-    case 'trill':
-      part2 = 'TikTok';
-      break;
-    case 'task':
-      part2 = 'TickTick';
-      break;
-    case 'app':
-      part2 = 'Twitch';
       break;
   }
 
@@ -183,7 +147,7 @@ function reportSys(args, ws) {
   );
 
   console.log(
-    '[builder] Please report these informations to https://github.com/reisxd/revanced-builder/issues'
+    '[builder] Please report these informations to https://github.com/inotia00/rvx-builder/issues'
   );
   console.log(
     `OS: ${process.platform}\nArguements: ${args.join(

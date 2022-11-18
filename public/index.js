@@ -162,7 +162,7 @@ function getAppVersions(isRooted) {
     <span>Versions marked as beta might have bugs or can be unstable, unless marked as recommended<span>
     ${
       isRooted
-        ? '<span><strong>You are building rooted ReVanced</strong>, ReVanced Builder will automatically download the correct version for you.<br>If you didn\'t intend on doing a rooted build, include all "Root required to exclude" patches<span>'
+        ? '<span><strong>You are building rooted ReVanced Extended</strong>, ReVanced Extended Builder will automatically download the correct version for you.<br>If you didn\'t intend on doing a rooted build, include all "Root required to exclude" patches<span>'
         : ''
     }
     `;
@@ -337,7 +337,7 @@ ws.onmessage = (msg) => {
 
         const versionsElement = document.getElementById('versions');
 
-        for (let i = 0; i < len; i++) {
+        for (let i = 0; i < len - 1; i++) {
           const version = message.versionList[i];
           const noRec = version.recommended == 'NOREC';
 
@@ -353,6 +353,18 @@ ws.onmessage = (msg) => {
           } ${
             !noRec ? (version.recommended ? ' (recommended)' : '') : ''
           }</label></li>`;
+        }
+
+        if (message.selectedApp === 'youtube') {
+          const oldversion = '17.34.36';
+
+          versionsElement.innerHTML += `
+            <li>
+            <input type="radio" name="version" id="app-${len - 1}" value="${
+            oldversion
+          }" data-beta="0" />
+            <label for="app-${len - 1}">${oldversion} (for Android 6 & 7)
+          </label></li>`;
         }
 
         if (message.selectedApp === 'youtube.music' && !message.foundDevice)

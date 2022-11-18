@@ -6,7 +6,7 @@ SCR_NAME_EXEC=$0
 SCR_NAME_EXEC_FP=$(realpath $0)
 SCR_NAME=$(basename $SCR_NAME_EXEC)
 SCR_NAME=${SCR_NAME%.*}
-RVB_DIR=$HOME/revanced-builder
+RVB_DIR=$HOME/rvx-builder
 
 COLOR_OFF='\033[0m'
 COLOR_RED='\033[1;31m'
@@ -16,7 +16,7 @@ help_info() {
 Usage: $SCR_NAME [command] [options]
 
 Commands:
-  run                          Launches the revanced-builder.
+  run                          Launches the rvx-builder.
                                Running $SCR_NAME_EXEC without arguments will
                                assume this command (i.e. will run the
                                builder).
@@ -50,15 +50,15 @@ error() {
 }
 
 dload_and_install() {
-  log "Downloading revanced-builder..."
-  curl -sLo revanced-builder.zip https://github.com/reisxd/revanced-builder/archive/refs/heads/main.zip
+  log "Downloading rvx-builder..."
+  curl -sLo rvx-builder.zip https://github.com/inotia00/rvx-builder/archive/refs/heads/revanced-extended.zip
   log "Unzipping..."
-  unzip -qqo revanced-builder.zip
-  rm revanced-builder.zip
-  mv revanced-builder-main/{.[!.]*,*} .
+  unzip -qqo rvx-builder.zip
+  rm rvx-builder.zip
+  mv rvx-builder-revanced-extended/{.[!.]*,*} .
   log "Installing packages..."
   npm install --omit=dev
-  rmdir revanced-builder-main
+  rmdir rvx-builder-revanced-extended
   [[ -z "$1" ]] && log "Done. Execute \`$SCR_NAME_EXEC run\` to launch the builder."
 }
 
@@ -99,12 +99,12 @@ Possible reasons (in the order of commonality):
   install_dependencies
 
   if [[ ! -d $RVB_DIR ]]; then
-    log "revanced-builder not installed. Installing..."
+    log "rvx-builder not installed. Installing..."
     mkdir -p $RVB_DIR
     cd $RVB_DIR
     dload_and_install n
   else
-    log "revanced-builder found."
+    log "rvx-builder found."
     log "All checks done."
   fi
   termux-wake-lock
@@ -130,7 +130,7 @@ run_builder() {
 }
 
 reinstall_builder() {
-  log "Deleting revanced-builder..."
+  log "Deleting rvx-builder..."
   if [[ $1 != "--delete-keystore" ]]; then
     if [ -f "$RVB_DIR/revanced/revanced.keystore" ]; then
       mv $RVB_DIR/revanced/revanced.keystore $HOME/revanced.keystore
@@ -159,7 +159,7 @@ update_builder() {
   if [ -f "$RVB_DIR/includedPatchesList.json" ]; then
     mv $RVB_DIR/includedPatchesList.json $HOME/includedPatchesList.json
   fi
-  log "Deleting revanced-builder..."
+  log "Deleting rvx-builder..."
   rm -r $RVB_DIR
   log "Restoring the backup..."
   mkdir -p $RVB_DIR
@@ -170,7 +170,7 @@ update_builder() {
   if [ -f "$HOME/includedPatchesList.json" ]; then
     mv $HOME/includedPatchesList.json $RVB_DIR/includedPatchesList.json
   fi
-  log "Updating revanced-builder..."
+  log "Updating rvx-builder..."
   cd $RVB_DIR
   dload_and_install n
   run_self_update
@@ -181,9 +181,9 @@ run_self_update() {
 
   # Download new version
   log "Downloading latest version..."
-  if ! curl -sLo $SCR_NAME_EXEC_FP.tmp https://raw.githubusercontent.com/reisxd/revanced-builder/main/android-interface.sh ; then
+  if ! curl -sLo $SCR_NAME_EXEC_FP.tmp https://raw.githubusercontent.com/inotia00/rvx-builder/revanced-extended/android-interface.sh ; then
     log "Failed: Error while trying to download new version!"
-    error "File requested: https://raw.githubusercontent.com/reisxd/revanced-builder/main/android-interface.sh" n
+    error "File requested: https://raw.githubusercontent.com/inotia00/rvx-builder/revanced-extended/android-interface.sh" n
   fi
   log "Done."
 

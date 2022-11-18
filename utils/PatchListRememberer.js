@@ -26,6 +26,14 @@ const defaultPatchesList = JSON.stringify(
       {
         name: 'trill',
         patches: []
+      },
+      {
+        name: 'task',
+        patches: []
+      },
+      {
+        name: 'app',
+        patches: []
       }
     ]
   },
@@ -66,7 +74,7 @@ function writePatches(pkgName, patches) {
   if (!existsSync('includedPatchesList.json')) {
     createRemembererFile();
   }
-  
+
   const patchesList = JSON.parse(
     readFileSync('includedPatchesList.json', 'utf8')
   );

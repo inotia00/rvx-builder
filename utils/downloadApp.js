@@ -43,6 +43,17 @@ async function downloadApp(ws) {
       versionDownload = await fetch(
         `https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok/tik-tok-${apkMirrorVersionArg}-release/`
       );
+      break;
+    case 'task':
+      versionDownload = await fetch(
+        `https://www.apkmirror.com/apk/appest-inc/ticktick-to-do-list-with-reminder-day-planner/ticktick-to-do-list-with-reminder-day-planner-${apkMirrorVersionArg}-release/`
+      );
+      break;
+    case 'app':
+      versionDownload = await fetch(
+        `https://www.apkmirror.com/apk/twitch-interactive-inc/twitch/twitch-${apkMirrorVersionArg}-release/`
+      );
+      break;
   }
 
   if (!versionDownload.ok) {

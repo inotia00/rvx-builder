@@ -93,6 +93,13 @@ async function reinstallReVanced() {
       break;
     case 'trill':
       pkgNameToGetUninstalled = 'com.ss.android.ugc.trill';
+      break;
+    case 'task':
+      pkgNameToGetUninstalled = 'com.ticktick.task';
+      break;
+    case 'app':
+      pkgNameToGetUninstalled = 'tv.twitch.android.app';
+      break;
   }
 
   await exec(
@@ -125,6 +132,16 @@ function outputName() {
       break;
     case 'warnapp':
       part2 = 'WarnWetter';
+      break;
+    case 'trill':
+      part2 = 'TikTok';
+      break;
+    case 'task':
+      part2 = 'TickTick';
+      break;
+    case 'app':
+      part2 = 'Twitch';
+      break;
   }
 
   // TODO: If the existing input APK is used from revanced/ without downloading, version and arch aren't set

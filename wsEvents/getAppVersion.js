@@ -14,6 +14,8 @@ const APKMIRROR_UPLOAD_BASE = 'https://www.apkmirror.com/uploads/?appcategory=';
  * @param {string} ver
  */
 const sanitizeVersion = (ver) => {
+  while (ver.match(/\./g).length > 2) ver = ver.replace(/.([^.]*)$/, '$1');
+
   return ver
     .replace(/\.0(\d)/gi, '.$1') // because apparently x.0y.z (ex. 5.09.51) isn't a valid version
     .replace(/^(\d+)\.(\d+)$/gi, '$1.$2.0'); // nor are versions without a patch (ex. 2.3)
@@ -135,6 +137,15 @@ module.exports = async function getAppVersion(ws, message) {
       break;
     case 'trill':
       versionsList = await getPage(`${APKMIRROR_UPLOAD_BASE}tik-tok`);
+      break;
+    case 'task':
+      versionsList = await getPage(
+        `${APKMIRROR_UPLOAD_BASE}ticktick-to-do-list-with-reminder-day-planner`
+      );
+      break;
+    case 'app':
+      versionsList = await getPage(`${APKMIRROR_UPLOAD_BASE}twitch`);
+      break;
   }
 
   /** @type {{ version: string; recommended: boolean; beta: boolean }[]} */
@@ -150,7 +161,10 @@ module.exports = async function getAppVersion(ws, message) {
       .replace('Twitter ', '')
       .replace('Reddit ', '')
       .replace('WarnWetter ', '')
-      .replace('TikTok ', '');
+      .replace('TikTok ', '')
+      .replace('TickTick:To-do list & Tasks ', '')
+      .replace('Twitch: Live Game Streaming ', '')
+      .replace('_', ' ');
 
     if (
       (global.jarNames.selectedApp === 'android' &&

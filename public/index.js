@@ -12,6 +12,10 @@ let hasFinished = false;
 let arch;
 let versionChoosen;
 
+if (localStorage.getItem('black-theme')) {
+  document.documentElement.classList.add('black');
+}
+
 function sendCommand(args) {
   ws.send(JSON.stringify(args));
 }
@@ -182,18 +186,6 @@ function getAlreadyExists() {
   sendCommand({ event: 'checkFileAlreadyExists' });
 }
 
-function openAbout() {
-  window.open('/about', '_blank');
-}
-
-function openGitHub() {
-  window.open('https://github.com/reisxd/revanced-builder', '_blank');
-}
-
-function openSettings() {
-  location.href = '/settings';
-}
-
 /**
  * @param {string} phrase
  */
@@ -264,9 +256,11 @@ ws.onmessage = (msg) => {
             patch.name
           }" data-excluded="${patch.excluded ? '1' : '0'}" type="checkbox">
   <label for="select-patch-${i}">
-    <span style="float:right;"><strong>${
-      patch.isRooted ? 'Needed for Non-Root Building' : ''
-    }</strong></span>
+  ${
+    patch.isRooted
+      ? '<span class="no-root"><strong>Needed for Non-Root Building</strong></span>'
+      : ''
+  }
     <span><strong class="patchName">${toTitleCase(
       patch.name
     )}</strong>&nbsp;&nbsp;(${
@@ -287,7 +281,9 @@ ws.onmessage = (msg) => {
 
           Array.from(document.getElementsByClassName('patchName'))
             .filter((x) => x.innerText.toLowerCase().includes(searchText))
-            .forEach((x) => (x.parentNode.parentNode.style.display = 'flex'));
+            .forEach(
+              (x) => (x.parentNode.parentNode.parentNode.style.display = 'flex')
+            );
         });
 
         Array.from(document.getElementsByClassName('select'))

@@ -20,11 +20,13 @@ For developers, see [this](https://github.com/inotia00/rvx-builder/blob/revanced
 
 ## How to use (Docker)
 
-Required [docker](https://docs.docker.com/get-docker/) and [docker-compose(for linux cli)](https://docs.docker.com/compose/install/linux/) must be installed
+Required [docker](https://docs.docker.com/get-docker/) and [docker-compose(for linux cli)](https://docs.docker.com/compose/install/linux/) must be installed.
 
-**Note: If using docker desktop docker-compose will be pre-installed**
+**Note: If using Docker Desktop, docker-compose will already be pre-installed.**
 
-Clone the repository and cd into the directory `revanced-builder`
+Clone the repository and cd into the directory `rvx-builder`
+
+**Note: Make sure you are in the `revanced-extended` branch, you can make sure of that by doing a `git checkout revanced-extended` when cloned into `rvx-builder`**
 
 Build using docker-compose
 
@@ -47,7 +49,7 @@ To stop your container
 docker-compose down
 ```
 
-**Note: docker-compose uses docker-compose.yml so make sure you are in the same directory `revanced-builder`**
+**Note: docker-compose uses docker-compose.yml so make sure you are in the same directory `rvx-builder`**
 
 To update to newer version of builder, stop existing container if running and build the image again and start the container again
 
@@ -74,4 +76,4 @@ docker rmi <name_of_the_image> -f
 
 To update to newer version of builder, stop existing container if running and build the image again and start the container again
 
-In both the build a persistent storage is kept so all the build are stored in `rvx-builder/revanced/` 
+In both the builds a persistent storage is kept so all the builds are stored in `rvx-builder/revanced/` 

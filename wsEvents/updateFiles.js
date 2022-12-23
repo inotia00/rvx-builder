@@ -32,19 +32,19 @@ module.exports = async function updateFiles(ws) {
 
   const filesToDownload = [
     {
-      owner: 'revanced',
+      owner: 'inotia00',
       repo: 'revanced-cli'
     },
     {
-      owner: 'revanced',
+      owner: 'inotia00',
       repo: 'revanced-patches'
     },
     {
-      owner: 'revanced',
+      owner: 'inotia00',
       repo: 'revanced-integrations'
     },
     {
-      owner: 'TeamVanced',
+      owner: 'inotia00',
       repo: 'VancedMicroG'
     }
   ];

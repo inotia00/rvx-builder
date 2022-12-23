@@ -11,7 +11,6 @@ module.exports = async function parsePatch(packageName, hasRoot) {
 
   const rootedPatches = [
     'microg-support',
-    'hide-cast-button',
     'music-microg-support'
   ];
   const patches = [];

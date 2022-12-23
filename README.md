@@ -1,6 +1,6 @@
-# ReVanced Builder
+# ReVanced Extended Builder
 
-This project will allow you to download the APK of any of the [officially supported](https://github.com/revanced/revanced-patches#-patches) apps and build ReVanced easily!
+This project will allow you to download the APK of [supported](https://github.com/inotia00/revanced-patches/tree/revanced-extended#-patches) apps and build ReVanced Extended easily!
 
 ## Required
 
@@ -16,7 +16,7 @@ If you are on a PC, download the latest executable from [here](https://github.co
 
 ## For developers
 
-For developers, see [this](https://github.com/reisxd/revanced-builder/blob/main/DEVELOPERS.md)
+For developers, see [this](https://github.com/inotia00/rvx-builder/blob/revanced-extended/DEVELOPERS.md)
 
 ## How to use (Docker)
 
@@ -24,7 +24,7 @@ Required [docker](https://docs.docker.com/get-docker/) and [docker-compose (for 
 
 **Note:** If you're using Docker Desktop, `docker-compose` will be pre-installed.
 
-Clone the repository and `cd` into the directory `revanced-builder`
+Clone the repository and `cd` into the directory `rvx-builder`
 
 ### Build using `docker-compose`
 
@@ -73,4 +73,4 @@ docker rmi <name_of_the_image> -f
 
 To update to a newer version of Builder, stop the existing container if it is running, build the container start it again.
 
-In both the builds, a persistent storage is kept. All the builds are stored in `<path/to>/revanced-builder/revanced/`.
+In both the builds, a persistent storage is kept. All the builds are stored in `<path/to>/rvx-builder/revanced/`.

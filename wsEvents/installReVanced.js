@@ -87,7 +87,7 @@ module.exports = async function installReVanced(ws) {
         'com.google.android.apps.youtube.music')
   ) {
     const currentMicroGVersion = (
-      await getDownloadLink({ owner: 'TeamVanced', repo: 'VancedMicroG' })
+      await getDownloadLink({ owner: 'inotia00', repo: 'VancedMicroG' })
     ).version
       .replace('v', '')
       .split('-')[0];

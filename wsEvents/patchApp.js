@@ -132,7 +132,7 @@ function reportSys(args, ws) {
   );
 
   console.log(
-    '[builder] Please report these informations to https://github.com/reisxd/revanced-builder/issues'
+    '[builder] Please report these informations to https://github.com/inotia00/rvx-builder/issues'
   );
   console.log(
     `OS: ${process.platform}\nArguements: ${args.join(

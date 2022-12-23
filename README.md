@@ -24,7 +24,7 @@ Required [docker](https://docs.docker.com/get-docker/) and [docker-compose (for 
 
 **Note:** If you're using Docker Desktop, `docker-compose` will be pre-installed.
 
-Clone the repository and `cd` into the directory `rvx-builder`
+Clone the repository and change into the `revanced-extended` branch with `git clone --depth=1 --no-tags -b revanced-extended --single-branch https://github.com/inotia00/rvx-builder` then `cd` into the directory `rvx-builder`
 
 ### Build using `docker-compose`
 
@@ -46,7 +46,7 @@ To stop the container:
 docker-compose down
 ```
 
-**Note: docker-compose uses docker-compose.yml so make sure you are in the same directory `revanced-builder`**
+**Note: docker-compose uses docker-compose.yml so make sure you are in the same directory `rvx-builder`**
 
 To update to a newer version, stop the existing container if it is running, build the image and start it again.
 
@@ -59,7 +59,7 @@ docker build . -t <name_of_the_image> --no-cache
 Run the newly built container:
 
 ```bash
-docker run -d --name <name_of_container> -p 8000:8000 --restart unless-stopped -v ./revanced/:/app/revanced-builder/revanced/ <name_of_the_image>
+docker run -d --name <name_of_container> -p 8000:8000 --restart unless-stopped -v ./revanced/:/app/rvx-builder/revanced/ <name_of_the_image>
 ```
 
 This launches the container on `http://localhost:8000`
@@ -71,6 +71,6 @@ docker rm <name_of_container> -f
 docker rmi <name_of_the_image> -f
 ```
 
-To update to a newer version of Builder, stop the existing container if it is running, build the container start it again.
+To update to a newer version of Builder, stop the existing container if it is running, build the container and start it again.
 
 In both the builds, a persistent storage is kept. All the builds are stored in `<path/to>/rvx-builder/revanced/`.

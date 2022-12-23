@@ -31,7 +31,7 @@ module.exports = async function parsePatch(packageName, hasRoot) {
     let compatibleVersion;
 
     for (const pkg of patch.compatiblePackages)
-      if (pkg.name.endsWith(packageName)) {
+      if (pkg.name === packageName) {
         isCompatible = true;
 
         if (pkg.versions.length !== 0) {
@@ -41,7 +41,11 @@ module.exports = async function parsePatch(packageName, hasRoot) {
         }
       }
 
-    if (!isCompatible || (isRooted && !hasRoot)) continue;
+    if (!isCompatible) {
+      if (patch.compatiblePackages.length !== 0) continue;
+    }
+
+    if (isRooted && !hasRoot) continue;
 
     for (const dependencyName of patch.dependencies) {
       if (dependencyName.includes('integrations')) {

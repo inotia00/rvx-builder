@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -15,82 +15,53 @@
     <div id="container">
       <main>
         <header>
-          <h1>Select the app you want to patch</h1>
+          <h1>
+            <i class="fa-solid fa-square-check"></i>Select the app to patch
+          </h1>
+          <h2 class="prog"></h2>
+          <form ref="uploadForm" id="uploadForm">
+            <input id="apkUpload" type="file" name="apk" accept=".apk" hidden />
+            <input type="submit" id="submitButton" hidden />
+          </form>
+          <button class="upl highlighted" onclick="apkField.click()">
+            <i class="fa-solid fa-upload"></i>Upload APK
+          </button>
+          <button class="shw" onclick="oldState(this)">Back</button>
+          <input
+            class="searchBox"
+            id="search"
+            type="search"
+            placeholder="Search for an app..."
+          />
         </header>
         <div id="content--wrapper">
           <div id="content">
-            <ul>
-              <li>
-                <input
-                  type="radio"
-                  name="app"
-                  id="app-1"
-                  value="youtube"
-                /><label for="app-1">YouTube</label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="app"
-                  id="app-2"
-                  value="youtube.music"
-                /><label for="app-2">YouTube Music</label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="app"
-                  id="app-3"
-                  value="android"
-                /><label for="app-3">Twitter</label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="app"
-                  id="app-4"
-                  value="frontpage"
-                /><label for="app-4">Reddit</label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="app"
-                  id="app-5"
-                  value="warnapp"
-                /><label for="app-5">WarnWetter</label>
-              </li>
-              <li>
-                <input type="radio" name="app" id="app-6" value="trill" /><label
-                  for="app-6"
-                  >TikTok</label
-                >
-              </li>
-              <li>
-                <input type="radio" name="app" id="app-7" value="task" /><label
-                  for="app-7"
-                  >TickTick</label
-                >
-              </li>
-              <li>
-                <input type="radio" name="app" id="app-8" value="app" /><label
-                  for="app-8"
-                  >Twitch</label
-                >
-              </li>
-            </ul>
+            <ul id="appList"></ul>
           </div>
         </div>
       </main>
       <footer>
-        <a href="https://github.com/reisxd/revanced-builder" target="_blank"
-          ><i class="social-icon fa-brands fa-xl fa-github"></i
+        <a
+          href="https://github.com/reisxd/revanced-builder"
+          target="_blank"
+          aria-label="ReVanced Builder on GitHub"
+          title="ReVanced Builder on GitHub"
+          ><i
+            aria-hidden="true"
+            class="social-icon fa-brands fa-xl fa-github"
+          ></i
         ></a>
-        <a href="/about"
-          ><i class="social-icon fa-solid fa-xl fa-question-circle"></i
+        <a
+          href="/about"
+          aria-label="About ReVanced Builder"
+          title="About ReVanced Builder"
+          ><i
+            aria-hidden="true"
+            class="social-icon fa-solid fa-xl fa-question-circle"
+          ></i
         ></a>
-        <a href="/settings"
-          ><i class="social-icon fa-xl fa-solid fa-gear"></i
+        <a href="/settings" aria-label="Settings" title="Settings"
+          ><i aria-hidden="true" class="social-icon fa-xl fa-solid fa-gear"></i
         ></a>
         <span class="right"></span>
         <button class="highlighted" id="continue" onclick="setApp()">
@@ -99,4 +70,5 @@
       </footer>
     </div>
   </body>
+  <script src="../apps.js"></script>
 </html>

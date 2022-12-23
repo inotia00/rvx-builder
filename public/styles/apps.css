@@ -48,3 +48,26 @@ input[type='radio'] + label:hover {
   box-shadow: inset 0px 0px 0px 1px #ddd;
   border-color: #ddd;
 }
+
+header h2,
+.shw {
+  display: none;
+}
+
+.inf div {
+  align-items: center;
+  display: inline-flex;
+}
+
+.inf p {
+  margin: auto;
+}
+
+.upl {
+  display: inline-flex;
+  align-items: center;
+}
+
+.upl i {
+  margin-right: 8px;
+}

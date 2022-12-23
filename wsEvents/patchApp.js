@@ -11,16 +11,6 @@ const mountReVanced = require('../utils/mountReVanced.js');
  * @param {import('ws').WebSocket} ws
  */
 async function mount(ws) {
-  let pkg;
-
-  switch (global.jarNames.selectedApp) {
-    case 'youtube':
-      pkg = 'com.google.android.youtube';
-      break;
-    case 'youtube.music':
-      pkg = 'com.google.android.apps.youtube.music';
-  }
-
   ws.send(
     JSON.stringify({
       event: 'patchLog',
@@ -28,7 +18,7 @@ async function mount(ws) {
     })
   );
 
-  await mountReVanced(pkg, ws);
+  await mountReVanced(global.jarNames.selectedApp.packageName, ws);
 }
 
 /**
@@ -44,11 +34,12 @@ async function afterBuild(ws) {
 
   if (!global.jarNames.isRooted && process.platform === 'android') {
     await exec(
-      `cp ${join(global.revancedDir, global.outputName)} /storage/emulated/0/${
+      `cp "${join(
+        global.revancedDir,
         global.outputName
-      }`
+      )}" "/storage/emulated/0/${global.outputName}"`
     );
-    await exec(`cp ${global.jarNames.microG} /storage/emulated/0/microg.apk`);
+    await exec(`cp "${global.jarNames.microG}" /storage/emulated/0/microg.apk`);
 
     ws.send(
       JSON.stringify({
@@ -57,7 +48,7 @@ async function afterBuild(ws) {
       })
     );
   } else if (process.platform === 'android') await mount(ws);
-  else if (!global.jarNames.devices[0])
+  else if (!(global.jarNames.devices && global.jarNames.devices[0]))
     ws.send(
       JSON.stringify({
         event: 'patchLog',
@@ -65,7 +56,7 @@ async function afterBuild(ws) {
       })
     );
 
-  if (global.jarNames.devices[0]) {
+  if (global.jarNames.devices && global.jarNames.devices[0]) {
     ws.send(JSON.stringify({ event: 'buildFinished', install: true }));
   } else ws.send(JSON.stringify({ event: 'buildFinished' }));
 }
@@ -73,32 +64,14 @@ async function afterBuild(ws) {
 async function reinstallReVanced() {
   let pkgNameToGetUninstalled;
 
-  switch (global.jarNames.selectedApp) {
-    case 'youtube':
+  switch (global.jarNames.selectedApp.packageName) {
+    case 'com.google.android.youtube':
       if (!global.jarNames.isRooted)
         pkgNameToGetUninstalled = 'app.revanced.android.youtube';
       break;
-    case 'youtube.music':
+    case 'com.google.android.apps.youtube.music':
       if (!global.jarNames.isRooted)
         pkgNameToGetUninstalled = 'app.revanced.android.apps.youtube.music';
-      break;
-    case 'android':
-      pkgNameToGetUninstalled = 'com.twitter.android';
-      break;
-    case 'frontpage':
-      pkgNameToGetUninstalled = 'com.reddit.frontpage';
-      break;
-    case 'warnapp':
-      pkgNameToGetUninstalled = 'de.dwd.warnapp';
-      break;
-    case 'trill':
-      pkgNameToGetUninstalled = 'com.ss.android.ugc.trill';
-      break;
-    case 'task':
-      pkgNameToGetUninstalled = 'com.ticktick.task';
-      break;
-    case 'app':
-      pkgNameToGetUninstalled = 'tv.twitch.android.app';
       break;
   }
 
@@ -115,34 +88,10 @@ async function reinstallReVanced() {
 
 function outputName() {
   const part1 = 'ReVanced';
-  let part2;
-
-  switch (global.jarNames.selectedApp) {
-    case 'youtube':
-      part2 = 'YouTube';
-      break;
-    case 'youtube.music':
-      part2 = 'YouTube_Music';
-      break;
-    case 'frontpage':
-      part2 = 'Reddit';
-      break;
-    case 'android':
-      part2 = 'Twitter';
-      break;
-    case 'warnapp':
-      part2 = 'WarnWetter';
-      break;
-    case 'trill':
-      part2 = 'TikTok';
-      break;
-    case 'task':
-      part2 = 'TickTick';
-      break;
-    case 'app':
-      part2 = 'Twitch';
-      break;
-  }
+  const appName = global.jarNames.selectedApp.appName;
+  let part2 = appName
+    ? global.jarNames.selectedApp.appName.replace(/[^a-zA-Z0-9\\.\\-]/g, '')
+    : global.jarNames.packageName.replace(/\./g, '');
 
   // TODO: If the existing input APK is used from revanced/ without downloading, version and arch aren't set
   const part3 = global?.apkInfo?.version ? `v${global.apkInfo.version}` : '';
@@ -206,7 +155,7 @@ module.exports = async function patchApp(ws) {
     './revanced-cache',
     '--experimental',
     '-a',
-    `${join(global.revancedDir, global.jarNames.selectedApp)}.apk`,
+    `${join(global.revancedDir, global.jarNames.selectedApp.packageName)}.apk`,
     '-o',
     join(global.revancedDir, 'revanced.apk')
   ];
@@ -223,7 +172,7 @@ module.exports = async function patchApp(ws) {
 
   args.push(...global.jarNames.patches.split(' '));
 
-  const buildProcess = spawn('java', args);
+  const buildProcess = spawn(global.javaCmd, args);
 
   buildProcess.stdout.on('data', async (data) => {
     ws.send(

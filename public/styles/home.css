@@ -1,13 +1,27 @@
-#content--wrapper {
-  box-shadow: none !important;
+body {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-#content {
+main {
+  padding: 20px;
   text-align: center;
-  display: flex;
   align-items: center;
-  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
+}
+
+#go {
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+}
+
+#go i {
+  margin-left: 8px;
 }
 
 .social-icon {
@@ -37,10 +51,18 @@
   justify-content: center;
   align-items: center;
 }
+svg {
+  min-height: 160px;
+  max-height: 250px;
+  margin-bottom: 17px;
+}
 
-.accent-fun {
-  color: var(--accentColor);
+h1 span {
   font-weight: bold;
+}
+
+h1 .accent-fun {
+  color: var(--accentColor);
   filter: brightness(160%);
 }
 

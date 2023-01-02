@@ -1,5 +1,5 @@
 {
-  "name": "revanced-builder",
+  "name": "rvx-builder",
   "version": "1.0.0",
   "description": "",
   "bin": "index.js",

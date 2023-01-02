@@ -2,8 +2,8 @@ const { existsSync, readFileSync, writeFileSync } = require('node:fs');
 
 const defaultSettings = {
   sources: {
-    patches: 'revanced/revanced-patches',
-    integrations: 'revanced/revanced-integrations'
+    patches: 'inotia00/revanced-patches',
+    integrations: 'inotia00/revanced-integrations'
   },
   patches: []
 };

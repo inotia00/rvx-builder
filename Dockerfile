@@ -9,9 +9,9 @@ RUN apt-get --yes update && \
   rm /app/zulu.deb && \
   apt-get -f install
 
-RUN git clone --depth=1 --no-tags https://github.com/reisxd/revanced-builder
+git clone -b revanced-extended https://github.com/inotia00/rvx-builder --depth=1 --no-tags
 
-WORKDIR /app/revanced-builder
+WORKDIR /app/rvx-builder
 
 RUN npm install --omit=dev
 

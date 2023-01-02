@@ -112,11 +112,11 @@ Possible reasons (in the order of commonality):
     log "revanced-builder found."
     log "All checks done."
   fi
-  termux-wake-lock
 }
 
 run_builder() {
   preflight
+  termux-wake-lock
   echo
   if [[ $1 == "--delete-cache" || $1 == "--dc" ]]; then
     delete_cache
@@ -132,6 +132,7 @@ run_builder() {
   if [[ $1 == "--delete-cache-after-no-keystore" || $1 == "--dcank" ]]; then
     delete_cache_no_keystore
   fi
+  termux-wake-unlock
 }
 
 delete_cache() {
@@ -175,8 +176,8 @@ update_builder() {
     mkdir -p $HOME/revanced_backup
     mv $RVB_DIR/revanced/* $HOME/revanced_backup
   fi
-  if [ -f "$RVB_DIR/includedPatchesList.json" ]; then
-    mv $RVB_DIR/includedPatchesList.json $HOME/includedPatchesList.json
+  if [ -f "$RVB_DIR/settings.json" ]; then
+    mv $RVB_DIR/settings.json $HOME/settings.json
   fi
   log "Deleting revanced-builder..."
   rm -r $RVB_DIR
@@ -186,8 +187,8 @@ update_builder() {
     mkdir -p $RVB_DIR/revanced
     mv $HOME/revanced_backup/* $RVB_DIR/revanced
   fi
-  if [ -f "$HOME/includedPatchesList.json" ]; then
-    mv $HOME/includedPatchesList.json $RVB_DIR/includedPatchesList.json
+  if [ -f "$HOME/settings.json" ]; then
+    mv $HOME/settings.json $RVB_DIR/settings.json
   fi
   log "Updating revanced-builder..."
   cd $RVB_DIR

@@ -9,7 +9,7 @@ RUN apt-get --yes update && \
   rm /app/zulu.deb && \
   apt-get -f install
 
-git clone -b revanced-extended https://github.com/inotia00/rvx-builder --depth=1 --no-tags
+RUN git clone -b revanced-extended https://github.com/inotia00/rvx-builder --depth=1 --no-tags
 
 WORKDIR /app/rvx-builder
 

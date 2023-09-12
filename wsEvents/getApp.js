@@ -16,9 +16,13 @@ async function fetchPackages(packages) {
     }
   );
 
-  const response = await request.json();
-
-  return response.data;
+  try {
+    const response = await request.json();
+    return response.data;
+  } catch (e) {
+    const response = [];
+    return response;
+  }
 }
 /**
  * @param {import('ws').WebSocket} ws

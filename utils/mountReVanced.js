@@ -39,8 +39,6 @@ module.exports = async function mountReVanced(pkg, ws) {
   writeFileSync(
     'mount.sh',
     `#!/system/bin/sh
-    MAGISKTMP="$(magisk --path)" || MAGISKTMP=/sbin
-    MIRROR="$MAGISKTMP/.magisk/mirror"
     while [ "$(getprop sys.boot_completed | tr -d '\r')" != "1" ]; do sleep 1; done
 
     base_path="/data/adb/revanced/${pkg}.apk"

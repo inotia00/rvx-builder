@@ -44,7 +44,7 @@ module.exports = async function mountReVanced(pkg, ws) {
     base_path="/data/adb/revanced/${pkg}.apk"
     stock_path=$(pm path ${pkg} | grep base | sed 's/package://g')
     chcon u:object_r:apk_data_file:s0 $base_path
-    mount -o bind $MIRROR$base_path $stock_path`
+    mount -o bind $base_path $stock_path`
   );
 
   // Move Mount script to folder

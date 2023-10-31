@@ -47,7 +47,12 @@ module.exports = async function mountReVanced(pkg, ws) {
     mount -o bind $base_path $stock_path`
   );
 
-  // Move Mount script to folder
+  // Create service.d folder
+  await exec(
+    `su -c 'mkdir -p /data/adb/service.d'`
+  );
+
+  // Move Mount script to service.d folder
   await exec(
     `su -c 'cp "./mount.sh" "/data/adb/service.d/mount_revanced_${pkg}.sh"'`
   );

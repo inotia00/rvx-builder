@@ -46,7 +46,7 @@ To stop the container:
 docker-compose down
 ```
 
-**Note: docker-compose uses docker-compose.yml so make sure you are in the same directory `revanced-builder`**
+**Note: docker-compose uses docker-compose.yml so make sure you are in the same directory `rvx-builder`**
 
 To update to a newer version, stop the existing container if it is running, build the image and start it again.
 
@@ -59,7 +59,7 @@ docker build . --pull -t <name_of_the_image> --no-cache
 Run the newly built container:
 
 ```bash
-docker run -d --name <name_of_container> -p 8000:8000 --restart unless-stopped -v ./revanced/:/app/revanced-builder/revanced/ <name_of_the_image>
+docker run -d --name <name_of_container> -p 8000:8000 --restart unless-stopped -v ./revanced/:/app/rvx-builder/revanced/ <name_of_the_image>
 ```
 
 This launches the container on `http://localhost:8000`

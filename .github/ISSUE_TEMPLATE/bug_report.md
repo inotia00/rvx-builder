@@ -20,7 +20,7 @@ Steps to reproduce the behavior:
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**revanced-builder Version:** [e.g. v1.2.10]
+**rvx-builder Version:** [e.g. v3.11.1]
 
 **Desktop (please complete the following information):**
 

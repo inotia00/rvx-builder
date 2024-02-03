@@ -2,7 +2,7 @@ let
   pkgs = import <nixpkgs> {};
 in
   pkgs.mkShellNoCC {
-    name = "revanced-builder";
+    name = "rvx-builder";
     packages = [
       pkgs.android-tools
       pkgs.nodejs

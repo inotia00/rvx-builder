@@ -63,7 +63,7 @@ set_alias() {
 
 dload_and_install() {
   log "Downloading rvx-builder..."
-  curl -sLo rvx-builder.zip https://github.com/inotia00/rvx-builder/archive/refs/heads/revanced-extended.zip
+  curl -sLo rvx-builder.zip https://github.com/anzarfarooq/rvx-builder/archive/refs/heads/revanced-extended.zip
   log "Unzipping..."
   unzip -qqo rvx-builder.zip
   rm rvx-builder.zip
@@ -206,7 +206,7 @@ run_self_update() {
 
   # Download new version
   log "Downloading latest version..."
-  ! curl -sLo "$SCR_NAME_EXEC_FP".tmp https://raw.githubusercontent.com/inotia00/rvx-builder/revanced-extended/android-interface.sh && {
+  ! curl -sLo "$SCR_NAME_EXEC_FP".tmp https://raw.githubusercontent.com/anzarfarooq/rvx-builder/revanced-extended/android-interface.sh && {
     log "Failed: Error while trying to download new version!"
     error "File requested: https://raw.githubusercontent.com/inotia00/rvx-builder/revanced-extended/android-interface.sh" n
   } || log "Done."

@@ -1,18 +1,18 @@
 # ReVanced Extended Builder
 
-This project will allow you to download the APK of [supported](https://github.com/inotia00/revanced-patches/tree/revanced-extended#-patches) apps and build ReVanced Extended easily!
+This project will allow you to download the APK of [supported](https://github.com/inotia00/revanced-patches?tab=readme-ov-file#-list-of-patches-in-this-repository) apps and build ReVanced Extended easily!
 
 ## Required
 
-You'll need at least [Zulu JDK 17](https://www.azul.com/downloads/?version=java-17-lts&package=jdk) and [ADB](https://developer.android.com/studio/command-line/adb) (optional, required only for rooted phones).
+You'll need at least [Zulu JDK 17](https://www.azul.com/downloads/?version=java-17-lts&package=jdk).
 
-If you plan to use it from source, you'll also require [Node.js >= 16](https://nodejs.org/).
+If you plan to use it from source, you'll also need [Node.js >= 16](https://nodejs.org/).
 
 ## How to use
 
-If you are on a PC, download the latest executable from [here](https://github.com/inotia00/rvx-builder/releases/latest) or if you are on a Android device, please see [this](https://github.com/inotia00/rvx-builder/wiki/How-to-use-rvx-builder-on-Android).
+To use on PC, see [this document](https://github.com/inotia00/revanced-documentation/blob/main/docs/rvx-builder%20(pc).md). 
 
-**NOTE: If you intend to build the rooted version of either YouTube or YouTube Music, you must have the stock YouTube app to be the same version as the one chosen for building. Otherwise, the build will fail.**
+To use on Android (via Termux), see [this document](https://github.com/inotia00/revanced-documentation/blob/main/docs/rvx-builder%20(android).md).
 
 ## For developers
 

@@ -2,6 +2,7 @@ const { spawn } = require('node:child_process');
 const { version } = require('node:os');
 const { existsSync, renameSync } = require('node:fs');
 const { join, sep: separator } = require('node:path');
+const { getSources } = require('../utils/Settings.js');
 
 const exec = require('../utils/promisifiedExec.js');
 
@@ -128,7 +129,8 @@ function outputName() {
     .split(separator)
     .at(-1)
     .replace('revanced-patches-', '')
-    .replace('.jar', '')}`;
+    .replace('.jar', '')
+    .replace('.rvp', '')}`;
 
   // Filename: ReVanced-<AppName>-<AppVersion>-[Arch]-cli_<CLI_Version>-patches_<PatchesVersion>.apk
   let outputName = '';
@@ -172,23 +174,34 @@ module.exports = async function patchApp(ws, message) {
     resetPatchOptions(ws);
   }
 
+  const source = getSources();
+  const cli4 = source.cli4 == 'true';
+
   /** @type {string[]} */
   const args = [
     '-jar',
     global.jarNames.cli,
     'patch',
     `${join(global.revancedDir, global.jarNames.selectedApp.packageName)}.apk`,
-    '-b',
-    global.jarNames.patchesJar,
-    '-m',
-    global.jarNames.integrations,
-    '--options',
-    './options.json',
     '-f',
-    '-p',
+    '--purge',
     '-o',
     join(global.revancedDir, 'revanced.apk')
   ];
+
+  if (cli4) {
+    args.push('-b');
+    args.push(global.jarNames.patchesJar);
+    args.push('-m');
+    args.push(global.jarNames.integrations);
+    args.push('--options');
+  } else {
+    args.push('-p');
+    args.push(global.jarNames.patchesJar);
+    args.push('--legacy-options');
+  }
+
+  args.push('./options.json');
 
   if (process.platform === 'android') {
     args.push('--custom-aapt2-binary');
@@ -220,9 +233,19 @@ module.exports = async function patchApp(ws, message) {
     }
   }
 
-  args.push(...global.jarNames.includedPatches);
-  args.push(...global.jarNames.excludedPatches);
-
+  if (cli4) {
+    args.push(...global.jarNames.includedPatches);
+    args.push(...global.jarNames.excludedPatches);
+  } else {
+    const patchesArray = [];
+    for (const patch of global.jarNames.excludedPatches) {
+      patchesArray.push(patch.replace('-e', '-d'));
+    }
+    for (const patch of global.jarNames.includedPatches) {
+      patchesArray.push(patch.replace('-i', '-e'));
+    }
+    args.push(...patchesArray);
+  }
   const buildProcess = spawn(global.javaCmd, args);
 
   buildProcess.stdout.on('data', async (data) => {

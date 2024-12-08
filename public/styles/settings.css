@@ -69,7 +69,15 @@ p {
   display: none;
 }
 
-#set-sources-pre-releases {
+#set-sources-update {
+  display: none;
+}
+
+#integrations-org {
+  display: none;
+}
+
+#integrations-src {
   display: none;
 }
 

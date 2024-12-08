@@ -7,7 +7,7 @@ if (localStorage.getItem('black-theme')) {
   document.getElementById('blackBtn').checked = true;
 }
 if (localStorage.getItem('pre-releases')) {
-  document.getElementById('preReleases').checked = true;
+  document.getElementById('preReleasesBtn').checked = true;
 }
 if (localStorage.getItem('rip-libs')) {
   document.getElementById('ripLibsBtn').checked = true;
@@ -48,14 +48,13 @@ document.getElementById('blackBtn').addEventListener('click', function () {
     dElement.classList.add('black');
   }
 });
-document.getElementById('preReleases').addEventListener('click', function () {
+document.getElementById('preReleasesBtn').addEventListener('click', function () {
   if (localStorage.getItem('pre-releases')) {
     localStorage.removeItem('pre-releases');
-    document.getElementById('set-sources-pre-releases').click();
   } else {
     localStorage.setItem('pre-releases', true);
-    document.getElementById('set-sources-pre-releases').click();
   }
+  document.getElementById('set-sources-update').click();
 });
 document.getElementById('ripLibsBtn').addEventListener('click', function () {
   if (localStorage.getItem('rip-libs')) {

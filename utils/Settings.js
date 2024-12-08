@@ -6,7 +6,8 @@ const defaultSettings = {
     patches: 'inotia00/revanced-patches',
     integrations: 'inotia00/revanced-integrations',
     microg: 'ReVanced/GmsCore',
-    prereleases: 'false'
+    prereleases: 'false',
+    cli4: 'false'
   },
   patches: []
 };

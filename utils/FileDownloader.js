@@ -12,29 +12,15 @@ let ws;
 /**
  * @param {string} fileName
  */
-async function overWriteJarNames(fileName) {
+async function overWriteJarNames(fileName, cli4) {
   const filePath = joinPath(global.revancedDir, fileName);
 
   const source = getSources();
   const cli = source.cli.split('/')[1];
-  const patches = source.patches.split('/')[1];
-  const integrations = source.integrations.split('/')[1];
   const microg = source.microg.split('/')[1];
 
   if (fileName.includes(cli) && fileName.endsWith('.jar')) {
     global.jarNames.cli = filePath;
-  }
-
-  if (fileName.includes(patches) && fileName.endsWith('.jar')) {
-    global.jarNames.patchesJar = filePath;
-  }
-
-  if (fileName.includes(patches) && fileName.endsWith('.json')) {
-    global.jarNames.patchesList = filePath;
-  }
-
-  if (fileName.includes(integrations) && fileName.endsWith('.apk')) {
-    global.jarNames.integrations = filePath;
   }
 
   if (fileName.includes(microg)) {
@@ -44,12 +30,33 @@ async function overWriteJarNames(fileName) {
   if (fileName.includes('APKEditor') && fileName.endsWith('.jar')) {
     global.jarNames.apkEditor = filePath;
   }
+
+  if (cli4) {
+    const patches = source.patches.split('/')[1];
+    const integrations = source.integrations.split('/')[1];
+    if (fileName.includes(patches)) {
+      if (fileName.endsWith('.jar')) {
+        global.jarNames.patchesJar = filePath;
+	  } else if (fileName.endsWith('.json')) {
+        global.jarNames.patchesList = filePath;
+      }
+	} else if (fileName.includes(integrations) && fileName.endsWith('.apk')) {
+      global.jarNames.integrations = filePath;
+	}
+  } else {
+    if (fileName.endsWith('.rvp')) {
+      global.jarNames.patchesJar = filePath;
+      global.jarNames.patchesList = joinPath(global.revancedDir, fileName.replace('.rvp', '.json'));
+	} else if (fileName.endsWith('.json')) {
+      global.jarNames.patchesList = filePath;
+	}
+  }
 }
 
 /**
  * @param {Record<string, any>} json
  */
-async function getDownloadLink(json, preReleases) {
+async function getDownloadLink(json, preReleases, cli4) {
   const preReleaseUrl = `https://github.com/${json.owner}/${json.repo}/releases`
   const preReleaseTag = 'span[class="ml-1 wb-break-all"]'
   const stableReleaseUrl = `https://github.com/${json.owner}/${json.repo}/releases/latest`
@@ -81,6 +88,9 @@ async function getDownloadLink(json, preReleases) {
 
   json_.version = $(releaseTag).first().text().replace(/\s/g, '');
 
+  if (json.owner === 'inotia00' && json.repo === 'revanced-cli' && cli4) {
+      json_.version = 'v4.6.2';
+  }
   const expandedAssets = await fetchWithUserAgent(
     `https://github.com/${json.owner}/${json.repo}/releases/expanded_assets/${json_.version}`
   );
@@ -105,7 +115,7 @@ async function getDownloadLink(json, preReleases) {
 /**
  * @param {Record<string, any>} assets
  */
-async function downloadFile(assets) {
+async function downloadFile(assets, cli4) {
   for (const asset of assets.assets) {
     const dir = readdirSync(global.revancedDir);
 
@@ -117,7 +127,7 @@ async function downloadFile(assets) {
     if (fileExt == 'asc') continue;
     const fileName = `${assets.repo}-${assets.version}.${fileExt}`;
 
-    overWriteJarNames(fileName);
+    overWriteJarNames(fileName, cli4);
 
     if (dir.includes(fileName)) continue;
 
@@ -180,13 +190,13 @@ async function dloadFromURL(url, outputPath, websocket) {
  * @param {Record<string, any>[]} repos
  * @param {import('ws').WebSocket} websocket
  */
-async function downloadFiles(repos, preReleases, websocket) {
+async function downloadFiles(repos, preReleases, cli4, websocket) {
   ws = websocket;
 
   for (const repo of repos) {
-    const downloadLink = await getDownloadLink(repo, preReleases);
+    const downloadLink = await getDownloadLink(repo, preReleases, cli4);
 
-    await downloadFile(downloadLink);
+    await downloadFile(downloadLink, cli4);
   }
 }
 

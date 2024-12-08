@@ -100,7 +100,7 @@
               <label class="switch"
                 ><input
                   class="check"
-                  id="preReleases"
+                  id="preReleasesBtn"
                   type="checkbox"
                   autocomplete="off" /><span class="slider"></span
               ></label>
@@ -165,7 +165,7 @@
                 <button id="set-sources-rvx-anddea" class="highlighted" onclick="setSourcesRVX_anddea();">RVX (anddea)</button>
                 <button id="set-sources-revanced" class="highlighted" onclick="setSourcesReVanced();">ReVanced</button>
                 <button id="set-sources-piko" class="highlighted" onclick="setSourcesPiko();">Piko</button>
-                <button id="set-sources-pre-releases" class="highlighted" onclick="setSourcesPreReleases();"></button>
+                <button id="set-sources-update" class="highlighted" onclick="setSources();"></button>
                 <button id="set-sources-rvx-arsclib" class="highlighted" onclick="setSourcesRVX_ARSCLib();"></button>
               </div>
 
@@ -177,18 +177,19 @@
               </div>
 
               <div>
+                <h3>Use Cli 4</h3>
+                <input id="cli4" class="searchBox" />
+              </div>
+
+              <div>
                 <h3>Patches Organization</h3>
                 <input id="patch-org" class="searchBox" />
                 <h3>Patches Source</h3>
                 <input id="patch-src" class="searchBox" />
               </div>
 
-              <div>
-                <h3>Integrations Organization</h3>
-                <input id="integrations-org" class="searchBox" />
-                <h3>Integrations Source</h3>
-                <input id="integrations-src" class="searchBox" />
-              </div>
+              <input id="integrations-org" />
+              <input id="integrations-src" />
 
               <div>
                 <h3>MicroG Organization</h3>

@@ -30,10 +30,11 @@ module.exports = async function updateFiles(ws) {
   const integrations = source.integrations.split('/');
   const microg = source.microg.split('/');
   const preReleases = source.prereleases == 'true';
+  const cli4 = source.cli4 == 'true';
 
   if (!existsSync(global.revancedDir)) mkdirSync(global.revancedDir);
 
-  const filesToDownload = [
+  const filesToDownloadCli4 = [
     {
       owner: cli[0],
       repo: cli[1]
@@ -45,6 +46,24 @@ module.exports = async function updateFiles(ws) {
     {
       owner: integrations[0],
       repo: integrations[1]
+    },
+    {
+      owner: microg[0],
+      repo: microg[1]
+    },
+    {
+      owner: 'REAndroid',
+      repo: 'APKEditor'
+    }
+  ];
+  const filesToDownloadCli5 = [
+    {
+      owner: cli[0],
+      repo: cli[1]
+    },
+    {
+      owner: patches[0],
+      repo: patches[1]
     },
     {
       owner: microg[0],
@@ -72,7 +91,8 @@ module.exports = async function updateFiles(ws) {
   }
 
   global.downloadFinished = false;
-  await downloadFiles(filesToDownload, preReleases, ws);
+  if (cli4) await downloadFiles(filesToDownloadCli4, preReleases, cli4, ws);
+  else await downloadFiles(filesToDownloadCli5, preReleases, cli4, ws);
 
   if (process.platform === 'android') await checkJDKAndAapt2(ws);
   else await checkJDkAndADB(ws);

@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
-const { readFileSync } = require('node:fs');
+const { existsSync, readFileSync } = require('node:fs');
+const exec = require('../utils/promisifiedExec.js');
 
 async function fetchPackages(packages) {
   const request = await fetch(
@@ -29,6 +30,14 @@ async function fetchPackages(packages) {
  * @param {import('ws').WebSocket} ws
  */
 module.exports = async function getPatches(ws) {
+  const patchesJson = `${global.jarNames.patchesList}`;
+  if (!existsSync(patchesJson)) {
+    const java = `${global.javaCmd}`;
+    const cli = `${global.jarNames.cli}`;
+    const patches = `${global.jarNames.patchesJar}`;
+    const command = `${java} -jar ${cli} patches --path=${patchesJson} ${patches}`;
+    await exec(command);
+  }
   const patchesList = JSON.parse(
     readFileSync(global.jarNames.patchesList, 'utf8')
   );

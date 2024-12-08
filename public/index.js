@@ -474,7 +474,9 @@ ws.onmessage = (msg) => {
     case 'finished':
       hasFinished = true;
 
-      document.getElementById('resetoptions').classList.remove('disabled');
+      try {
+        document.getElementById('resetoptions').classList.remove('disabled');
+      } catch (_) {}
       document.getElementById('continue').classList.remove('disabled');
       if (localStorage.getItem('auto-next')) {
         document.getElementById('continue').click();

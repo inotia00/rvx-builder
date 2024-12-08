@@ -1,10 +1,11 @@
 const { spawn } = require('node:child_process');
 const { version } = require('node:os');
-const { rmSync, renameSync } = require('node:fs');
+const { existsSync, renameSync } = require('node:fs');
 const { join, sep: separator } = require('node:path');
 
 const exec = require('../utils/promisifiedExec.js');
 
+const resetPatchOptions = require('./resetPatchOptions.js');
 const mountReVanced = require('../utils/mountReVanced.js');
 
 /**
@@ -167,6 +168,9 @@ function reportSys(args, ws) {
  * @param {import('ws').WebSocket} ws
  */
 module.exports = async function patchApp(ws, message) {
+  if (!existsSync('options.json')) {
+    resetPatchOptions(ws);
+  }
 
   /** @type {string[]} */
   const args = [

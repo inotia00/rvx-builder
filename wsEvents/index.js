@@ -7,7 +7,6 @@ const getPatches = require('./getPatches.js');
 const getSettings = require('./getSettings.js');
 const installReVanced = require('./installReVanced.js');
 const patchApp = require('./patchApp.js');
-const patchAppWithRipLibs = require('./patchAppWithRipLibs.js');
 const patchAppArscLib = require('./patchAppArscLib.js');
 const resetPatchOptions = require('./resetPatchOptions.js');
 const resetSettings = require('./resetSettings.js');
@@ -28,7 +27,6 @@ module.exports = {
   getSettings,
   installReVanced,
   patchApp,
-  patchAppWithRipLibs,
   patchAppArscLib,
   resetPatchOptions,
   resetSettings,

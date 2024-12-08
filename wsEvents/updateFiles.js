@@ -1,6 +1,6 @@
 const { existsSync, mkdirSync, rmSync } = require('node:fs');
 const { join: joinPath } = require('node:path');
-const { getSources, resetSettings } = require('../utils/Settings.js');
+const { getSources } = require('../utils/Settings.js');
 const { downloadFiles } = require('../utils/FileDownloader.js');
 const checkJDKAndAapt2 = require('../utils/checkJDKAndAapt2.js');
 const checkJDkAndADB = require('../utils/checkJDKAndADB.js');
@@ -24,18 +24,6 @@ global.jarNames = {
  * @param {import('ws').WebSocket} ws
  */
 module.exports = async function updateFiles(ws) {
-  try {
-    let testSource = getSources();
-    let testCli = testSource.cli.split('/');
-    let testPatches = testSource.patches.split('/');
-    let testIntegrations = testSource.integrations.split('/');
-    let testMicroG = testSource.microg.split('/');
-    if (typeof testSource.prereleases === 'undefined') {
-        resetSettings();
-    }
-  } catch (err) {
-    resetSettings();
-  }
   const source = getSources();
   const cli = source.cli.split('/');
   const patches = source.patches.split('/');

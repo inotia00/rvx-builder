@@ -166,7 +166,8 @@ function reportSys(args, ws) {
 /**
  * @param {import('ws').WebSocket} ws
  */
-module.exports = async function patchApp(ws) {
+module.exports = async function patchApp(ws, message) {
+
   /** @type {string[]} */
   const args = [
     '-jar',
@@ -188,6 +189,31 @@ module.exports = async function patchApp(ws) {
   if (process.platform === 'android') {
     args.push('--custom-aapt2-binary');
     args.push(join(global.revancedDir, 'aapt2'));
+
+    if (message.ripLibs) {
+        switch (process.arch) {
+          case 'arm':
+            args.push('--rip-lib=arm64-v8a');
+            args.push('--rip-lib=x86');
+            args.push('--rip-lib=x86_64');
+            break;
+          case 'arm64':
+            args.push('--rip-lib=armeabi-v7a');
+            args.push('--rip-lib=x86');
+            args.push('--rip-lib=x86_64');
+            break;
+          case 'ia32':
+            args.push('--rip-lib=armeabi-v7a');
+            args.push('--rip-lib=arm64-v8a');
+            args.push('--rip-lib=x86_64');
+            break;
+          case 'x64':
+            args.push('--rip-lib=armeabi-v7a');
+            args.push('--rip-lib=arm64-v8a');
+            args.push('--rip-lib=x86');
+            break;
+        }
+    }
   }
 
   args.push(...global.jarNames.includedPatches);

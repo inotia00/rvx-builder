@@ -10,7 +10,7 @@ const { WebSocketServer } = require('ws');
 const open_ = require('open');
 const pf = require('portfinder');
 
-const killProcess = require('kill-process-by-name');
+const fkill = require('fkill');
 
 const {
   checkFileAlreadyExists,
@@ -104,7 +104,11 @@ const cleanExit = async (svr) => {
   log('Killing any dangling processes...', false);
 
   try {
-    ['adb', 'java', 'aapt2'].forEach((p) => killProcess(p));
+    await fkill(['adb', 'java', 'aapt2'], {
+      forceAfterTimeout: 3000,
+      tree: true,
+      silent: true
+    });
     log('Done.', true, false);
   } catch (error) {
     log('Failed.', true, false);

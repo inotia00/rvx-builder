@@ -11,7 +11,7 @@ function getConsts(name) {
     case 'jreDir':
       return joinPath(
         global.revancedDir,
-        `zulu17.52.17-ca-jre17.0.12-${getConsts('platform')}_${getConsts(
+        `zulu17.54.21-ca-jre17.0.13-${getConsts('platform')}_${getConsts(
           'arch'
         )}`
       );
@@ -61,7 +61,7 @@ async function downloadJDK(ws) {
     const output = joinPath(global.revancedDir, 'JRE.tar.gz');
 
     await dloadFromURL(
-      `https://cdn.azul.com/zulu/bin/zulu17.52.17-ca-jre17.0.12-${getConsts(
+      `https://cdn.azul.com/zulu/bin/zulu17.54.21-ca-jre17.0.13-${getConsts(
         'platform'
       )}_${getConsts('arch')}.tar.gz`,
       output,

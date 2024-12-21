@@ -12,9 +12,6 @@ if (localStorage.getItem('pre-releases')) {
 if (localStorage.getItem('rip-libs')) {
   document.getElementById('ripLibsBtn').checked = true;
 }
-if (localStorage.getItem('arsclib')) {
-  document.getElementById('ARSCLibBtn').checked = true;
-}
 
 accentColors.forEach((color) => {
   if (
@@ -61,14 +58,5 @@ document.getElementById('ripLibsBtn').addEventListener('click', function () {
     localStorage.removeItem('rip-libs');
   } else {
     localStorage.setItem('rip-libs', true);
-  }
-});
-document.getElementById('ARSCLibBtn').addEventListener('click', function () {
-  if (localStorage.getItem('arsclib')) {
-    localStorage.removeItem('arsclib');
-    document.getElementById('set-sources-rvx').click();
-  } else {
-    localStorage.setItem('arsclib', true);
-    document.getElementById('set-sources-rvx-arsclib').click();
   }
 });

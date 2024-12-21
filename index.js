@@ -23,7 +23,6 @@ const {
   getSettings,
   installReVanced,
   patchApp,
-  patchAppArscLib,
   resetPatchOptions,
   resetSettings,
   selectApp,
@@ -202,9 +201,6 @@ wsServer.on('connection', (ws) => {
         break;
       case 'patchApp':
         await patchApp(ws, message);
-        break;
-      case 'patchAppArscLib':
-        await patchAppArscLib(ws);
         break;
       case 'resetPatchOptions':
         await resetPatchOptions(ws);

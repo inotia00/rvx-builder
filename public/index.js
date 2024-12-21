@@ -109,7 +109,7 @@ function setAppVersion(arch, version) {
     if (arch == null && versionChecked === null)
       return alert("You didn't select an app version!");
 
-    if (versionChecked !== null && !localStorage.getItem('arsclib')) {
+    if (versionChecked !== null) {
       if (
         versionChecked.hasAttribute('data-recommended') &&
         versionChecked.getAttribute('data-recommended') !== '1'
@@ -179,11 +179,7 @@ function getAppVersions(isRooted, page = 1) {
 }
 
 function buildReVanced() {
-  if (localStorage.getItem('arsclib')) {
-    sendCommand({ event: 'patchAppArscLib' });
-  } else {
-    sendCommand({ event: 'patchApp', ripLibs: localStorage.getItem('rip-libs') });
-  }
+  sendCommand({ event: 'patchApp', ripLibs: localStorage.getItem('rip-libs') });
 }
 
 function getAlreadyExists() {
@@ -269,14 +265,7 @@ function resetPatchOptions() {
 
 function resetSettings() {
   sendCommand({ event: 'resetSettings' });
-  disableARSCLib();
   setSourcesRVX();
-}
-
-function disableARSCLib() {
-  if (localStorage.getItem('arsclib')) {
-    document.getElementById('ARSCLibBtn').click();
-  }
 }
 
 function setSources() {
@@ -313,11 +302,6 @@ function setSources() {
   });
 }
 
-function disableARSCLibBeforeSetSources() {
-  disableARSCLib();
-  setSources();
-}
-
 function setSourcesRVX() {
   document.getElementById('cli-org').value = 'inotia00';
   document.getElementById('cli-src').value = 'revanced-cli';
@@ -333,7 +317,7 @@ function setSourcesRVX() {
   document.getElementById('microg-org').value = 'ReVanced';
   document.getElementById('microg-src').value = 'GmsCore';
 
-  disableARSCLibBeforeSetSources();
+  setSources();
 }
 
 function setSourcesRVX_anddea() {
@@ -348,7 +332,7 @@ function setSourcesRVX_anddea() {
   document.getElementById('integrations-org').value = 'anddea';
   document.getElementById('integrations-src').value = 'revanced-integrations';
 
-  disableARSCLibBeforeSetSources();
+  setSources();
 }
 
 function setSourcesReVanced() {
@@ -363,7 +347,7 @@ function setSourcesReVanced() {
   document.getElementById('integrations-org').value = 'revanced';
   document.getElementById('integrations-src').value = 'revanced-integrations';
 
-  disableARSCLibBeforeSetSources();
+  setSources();
 }
 
 function setSourcesPiko() {
@@ -376,21 +360,6 @@ function setSourcesPiko() {
   document.getElementById('patch-src').value = 'piko';
 
   document.getElementById('integrations-org').value = 'crimera';
-  document.getElementById('integrations-src').value = 'revanced-integrations';
-
-  disableARSCLibBeforeSetSources();
-}
-
-function setSourcesRVX_ARSCLib() {
-  document.getElementById('cli-org').value = 'inotia00';
-  document.getElementById('cli-src').value = 'revanced-cli-arsclib';
-
-  document.getElementById('cli4').value = 'true';
-
-  document.getElementById('patch-org').value = 'inotia00';
-  document.getElementById('patch-src').value = 'revanced-patches-arsclib';
-
-  document.getElementById('integrations-org').value = 'inotia00';
   document.getElementById('integrations-src').value = 'revanced-integrations';
 
   setSources();
@@ -515,7 +484,7 @@ ws.onmessage = (msg) => {
 
           versionsElement.innerHTML += `
           ${
-            message.page == 1 && i == 0 && !localStorage.getItem('arsclib')
+            message.page == 1 && i == 0
               ? `<li><input type="radio" name="version" id="app-${len}" value="${
                 autoSelect
               }" data-beta="0" data-recommended="1"/>

@@ -191,7 +191,7 @@ wsServer.on('connection', (ws) => {
         await getDevices(ws);
         break;
       case 'getPatches':
-        await getPatches(ws);
+        await getPatches(ws, message);
         break;
       case 'getSettings':
         await getSettings(ws);

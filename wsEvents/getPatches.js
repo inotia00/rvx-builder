@@ -6,7 +6,7 @@ const parsePatch = require('../utils/PatchesParser.js');
 /**
  * @param {import('ws').WebSocket} ws
  */
-module.exports = async function getPatches(ws) {
+module.exports = async function getPatches(ws, message) {
   let hasRoot = true;
 
   if (process.platform === 'android')
@@ -29,7 +29,8 @@ module.exports = async function getPatches(ws) {
       event: 'patchList',
       patchList: await parsePatch(
         global.jarNames.selectedApp.packageName,
-        hasRoot
+        hasRoot,
+        message.showUniversalPatches
       ),
       rememberedPatchList,
       uploadedApk: global.jarNames.selectedApp.uploaded

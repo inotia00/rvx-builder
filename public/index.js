@@ -39,7 +39,7 @@ function setApp() {
 }
 
 function loadPatches() {
-  sendCommand({ event: 'getPatches' });
+  sendCommand({ event: 'getPatches', showUniversalPatches: localStorage.getItem('universal-patches') });
 }
 
 function updateFiles() {

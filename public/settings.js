@@ -12,6 +12,9 @@ if (localStorage.getItem('pre-releases')) {
 if (localStorage.getItem('rip-libs')) {
   document.getElementById('ripLibsBtn').checked = true;
 }
+if (localStorage.getItem('universal-patches')) {
+  document.getElementById('universalPatchesBtn').checked = true;
+}
 
 accentColors.forEach((color) => {
   if (
@@ -58,5 +61,12 @@ document.getElementById('ripLibsBtn').addEventListener('click', function () {
     localStorage.removeItem('rip-libs');
   } else {
     localStorage.setItem('rip-libs', true);
+  }
+});
+document.getElementById('universalPatchesBtn').addEventListener('click', function () {
+  if (localStorage.getItem('universal-patches')) {
+    localStorage.removeItem('universal-patches');
+  } else {
+    localStorage.setItem('universal-patches', true);
   }
 });

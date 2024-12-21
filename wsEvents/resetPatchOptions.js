@@ -9,6 +9,6 @@ module.exports = async function resetPatchOptions(ws) {
   const patches = `${global.jarNames.patchesJar}`;
 
   await exec(
-    `${java} -jar ${cli} options --overwrite ${patches}`
+    `${java} -jar "${cli}" options --overwrite "${patches}"`
   );
 };

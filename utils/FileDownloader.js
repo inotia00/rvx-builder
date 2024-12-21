@@ -47,8 +47,6 @@ async function overWriteJarNames(fileName, cli4) {
     if (fileName.endsWith('.rvp')) {
       global.jarNames.patchesJar = filePath;
       global.jarNames.patchesList = joinPath(global.revancedDir, fileName.replace('.rvp', '.json'));
-	} else if (fileName.endsWith('.json')) {
-      global.jarNames.patchesList = filePath;
 	}
   }
 }

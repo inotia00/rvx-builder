@@ -340,7 +340,7 @@ function setSourcesRVX_anddea() {
   document.getElementById('cli-org').value = 'inotia00';
   document.getElementById('cli-src').value = 'revanced-cli';
 
-  document.getElementById('cli4').value = 'true';
+  document.getElementById('cli4').value = 'false';
 
   document.getElementById('patch-org').value = 'anddea';
   document.getElementById('patch-src').value = 'revanced-patches';

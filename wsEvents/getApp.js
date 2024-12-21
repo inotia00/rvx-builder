@@ -31,13 +31,25 @@ async function fetchPackages(packages) {
  */
 module.exports = async function getPatches(ws) {
   const patchesJson = `${global.jarNames.patchesList}`;
-  if (!existsSync(patchesJson)) {
-    const java = `${global.javaCmd}`;
-    const cli = `${global.jarNames.cli}`;
-    const patches = `${global.jarNames.patchesJar}`;
-    const command = `${java} -jar ${cli} patches --path=${patchesJson} ${patches}`;
+
+  const java = `${global.javaCmd}`;
+  const cli = `${global.jarNames.cli}`;
+  const patches = `${global.jarNames.patchesJar}`;
+  const command = `${java} -jar "${cli}" patches --path="${patchesJson}" "${patches}"`;
+
+  try {
+    const patchesList = JSON.parse(
+      readFileSync(global.jarNames.patchesList, 'utf8')
+    );
+    for (const patches of patchesList) {
+    if (patches.compatiblePackages === null) continue;
+      for (const packages of patches.compatiblePackages) {
+      }
+	}
+  } catch (e) {
     await exec(command);
   }
+
   const patchesList = JSON.parse(
     readFileSync(global.jarNames.patchesList, 'utf8')
   );

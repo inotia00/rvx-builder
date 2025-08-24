@@ -21,7 +21,14 @@ async function downloadApp(ws) {
     !versionDownload.ok &&
     global.jarNames.selectedApp.packageName === 'com.twitter.android'
   ) {
-    versionDownload = await fetchWithUserAgent(url.replace('/twitter/twitter', '/twitter/x-previously-twitter'));
+    versionDownload = await fetchWithUserAgent(
+      url.replace('/twitter/twitter', '/twitter/x-formerly-twitter')
+    );
+    if (!versionDownload.ok) {
+      versionDownload = await fetchWithUserAgent(
+        url.replace('/twitter/twitter', '/twitter/x-previously-twitter')
+      );
+    }
   }
 
   if (!versionDownload.ok) {
